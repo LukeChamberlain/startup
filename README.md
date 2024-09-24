@@ -53,5 +53,5 @@ For this deliverable I built out the structure of my cleanmusicplus.com using on
 - [x] **Links** - The login page automatically links to the search page. The search page links to filter selection page, which then links to page prompting you to add it to your own database, and all pages have a link to "Your Music", "clean your music page", and "log in" page.
 - [x] **Text** - Each of the songs have a title, and the filters also have text
 - [x] **Images** - included an Image of Mr.clean on the page that tells that user if the song is clean.
-- [x] **DB/Login** - Login is the first screen you see
-- [x] **WebSocket** - The preset filters options are filter presets that are submitted from other users.
+- [x] **DB/Login** - Login is the first screen you see, the websites stores songs that can filtered, and previous songs. 
+- [x] **WebSocket** - There are preset filter options that other people have used to clean their songs 
