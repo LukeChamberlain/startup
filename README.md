@@ -43,3 +43,15 @@ I am going to use the required technologies in the following ways.
   - storing songs in a database
 - **DB/Login** - Store users, filters, and songs in database. Register and login users. Credentials securely stored in database. Can't filter songs unless authenticated.
 - **WebSocket** - As each user searches and filters, they can share their filter presets.
+
+
+## HTML deliverable
+
+For this deliverable I built out the structure of my cleanmusicplus.com using only html
+
+- [x] **HTML pages** - Total of 5 HTML pages, one being the login page, one to search for songs, one to select filters, one to add the song to your own database, and one to view songs in your database of songs
+- [x] **Links** - The login page automatically links to the search page. The search page links to filter selection page, which then links to page prompting you to add it to your own database, and all pages have a link to "Your Music", "clean your music page", and "log in" page.
+- [x] **Text** - Each of the songs have a title, and the filters also have text
+- [x] **Images** - included an Image of Mr.clean on the page that tells that user if the song is clean.
+- [x] **DB/Login** - Login is the first screen you see
+- [x] **WebSocket** - The preset filters options are filter presets that are submitted from other users.
