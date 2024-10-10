@@ -8,6 +8,34 @@ body{
   font-style: normal;
 }
 
+.nav-link.active {
+    color: #35cfff  !important;
+  }
+
+.btn-primary {
+    background-color: #35cfff  !important; 
+    border-color: #35cfff  !important; 
+}
+
+.btn-primary:hover {
+    background-color: #2aa6d9  !important; 
+    border-color: #2aa6d9  !important; 
+}
+
+.btn-secondary {
+    background-color: #35cfff  !important; 
+    border-color: #35cfff  !important; 
+}
+
+.btn-secondary:hover {
+    background-color: #2aa6d9  !important; 
+    border-color: #2aa6d9  !important; 
+}
+
+/* Change heading color */
+h1 {
+    color: #35cfff; /* Set heading color */
+}
 body {
     display: flex;
     flex-direction: column;
@@ -37,12 +65,6 @@ body {
     flex-direction: row !important;
     list-style: none;
   }
-  
-  .navbar-brand {
-    padding-left: 0.3em;
-    border-bottom: solid rgb(182, 182, 182) thin;
-  }
-  
   menu .nav-item {
     padding: 0 0.3em;
   }
