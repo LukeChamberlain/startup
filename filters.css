@@ -7,6 +7,34 @@ body{
   font-weight: 500;
   font-style: normal;
 }
+.nav-link.active {
+  color: #35cfff  !important;
+}
+
+.btn-primary {
+  background-color: #35cfff  !important; 
+  border-color: #35cfff  !important; 
+}
+
+.btn-primary:hover {
+  background-color: #2aa6d9  !important; 
+  border-color: #2aa6d9  !important; 
+}
+
+.btn-secondary {
+  background-color: #35cfff  !important; 
+  border-color: #35cfff  !important; 
+}
+
+.btn-secondary:hover {
+  background-color: #2aa6d9  !important; 
+  border-color: #2aa6d9  !important; 
+}
+
+h1 {
+  color: #35cfff; 
+}
+
 body {
     display: flex;
     flex-direction: column;

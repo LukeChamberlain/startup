@@ -32,10 +32,10 @@ body{
     border-color: #2aa6d9  !important; 
 }
 
-/* Change heading color */
 h1 {
-    color: #35cfff; /* Set heading color */
+    color: #35cfff; 
 }
+
 body {
     display: flex;
     flex-direction: column;
