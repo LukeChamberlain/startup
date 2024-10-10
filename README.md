@@ -44,7 +44,6 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Store users, filters, and songs in database. Register and login users. Credentials securely stored in database. Can't filter songs unless authenticated.
 - **WebSocket** - As each user searches and filters, they can share their filter presets.
 
-
 ## HTML deliverable
 
 For this deliverable I built out the structure of my cleanmusicplus.com using only html
@@ -54,4 +53,16 @@ For this deliverable I built out the structure of my cleanmusicplus.com using on
 - [x] **Text** - Each of the songs have a title, and the filters also have text
 - [x] **Images** - included an Image of Mr.clean on the page that tells that user if the song is clean.
 - [x] **DB/Login** - Login is the first screen you see, the websites stores songs that can filtered, and previous songs. 
-- [x] **WebSocket** - There are preset filter options that other people have used to clean their songs 
+- [x] **WebSocket** - There are preset filter options that other people have used to clean their songs
+
+## CSS deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
+- [x] **Header, footer, and main content body** 
+- [x] **Navigation Elements** - I colored them to my websites color and the active page is highlighted in blue at the top.
+- [x] **Responsive to Window Resizing** - My app looks good in all sizes and it will only let you make it so small
+- [x] **Application Elements** - Header and footer are different colors then main.
+- [x] **Application Text Content** - All fonts are the same and colors are consistent and readable
+- [x] **Application Images** - Mr.clean image is styled and centered correctly
+
