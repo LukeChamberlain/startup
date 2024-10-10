@@ -61,10 +61,10 @@ body {
   menu {
     flex: 1;
     display: flex;
-    /*  overwrite Bootstrap so the menu does not wrap */
     flex-direction: row !important;
     list-style: none;
   }
+  
   menu .nav-item {
     padding: 0 0.3em;
   }
