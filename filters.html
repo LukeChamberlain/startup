@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanMusicPlus</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="filters.css" />
     <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-    crossorigin="anonymous"
-  />
+    crossorigin="anonymous"/>
 </head>
-    <body class="bg-light text-dark">
+    <body class="bg-light text-light">
       <header class="container-fluid">
         <nav class="navbar fixed-top navbar-light">
           <menu class="navbar-nav ms-auto d-flex justify-content-start gap-3">
@@ -26,10 +26,15 @@
           </menu>
         </nav>
       </header>
-      <p>Username: John</p>
-      <hr/>
-      </header>
-      <input type="checkbox" id="Filter1" name="Filter1" value="Filter1">
+      <main class="container-fluid bg-secondary text-center">
+        <div>
+           <div class="user-box">👤 John</div>
+              </div>
+          </div>
+          <div class="song-list left-aligned">
+            <div>
+              <h1>Select Your Filters</h1>
+              <input type="checkbox" id="Filter1" name="Filter1" value="Filter1">
       <label for="Filter1"> Swear Words</label><br>
       <input type="checkbox" id="Filter2" name="Filter2" value="Filter2">
       <label for="Filter2"> Violent Language</label><br>
@@ -50,12 +55,13 @@
       <form method="get" action="database.html">
         <button type="submit" class="btn btn-secondary">Next</button>
       </form>
-      </section>
+        </div>
+      </main>
       <footer class="bg-light" style="color: #35cfff;">
         <div class="container-fluid">
             <span>Luke Chamberlain</span>
             <a href="https://github.com/LukeChamberlain/startup" style="color: #35cfff;">Github</a>
         </div>
     </footer>
-</body>
+  </body>
 </html>
