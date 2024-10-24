@@ -38,7 +38,7 @@ header {
     border-color: #2aa6d9  !important; 
 }
 
-body {
+.body {
     display: flex;
     flex-direction: column;
     min-width: 375px;

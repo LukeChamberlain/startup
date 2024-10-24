@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-body {
+.body {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -38,7 +38,7 @@ header {
     border-color: #2aa6d9  !important; 
 }
 
-body {
+.body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
@@ -46,6 +46,9 @@ body {
   
   header {
     flex: 0 80px;
+  }
+  h1, h3 {
+    color: #35cfff; 
   }
   
   main {
