@@ -6,6 +6,8 @@ import './app.css';
 import Login from './login/Login';
 import CleanMusic from './cleanmusic/CleanMusic';
 import Profile from './profile/Profile';
+import Filters from './filters/Filters';
+import Database from './database/Database';
 
 export default function App() {
   return (
@@ -31,6 +33,8 @@ export default function App() {
             <Route path="/cleanmusic" element={<CleanMusic />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/filters" element={<Filters />} />
+            <Route path="/database" element={<Database />} />
           </Routes>
         </main>
 

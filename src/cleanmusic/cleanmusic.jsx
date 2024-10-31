@@ -1,22 +1,26 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cleanmusic.css';
 
 export default function CleanMusic() {
-  const navigate = useNavigate(); // Hook to navigate
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    navigate('/cleanmusic'); // Navigate to the cleanmusic route
+  const handleProfileNavigation = () => {
+    navigate('/profile'); // Navigates to profile page
+  };
+
+  const handleNext = () => {
+    navigate('/filters'); // Navigates to filters page
   };
 
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        <form onSubmit={handleSubmit} className="left-aligned">
-          <button type="submit" className="btn btn-secondary">John 👤</button>
-        </form>
+        {/* John button to go to Profile */}
+        <button type="button" className="btn btn-secondary" onClick={handleProfileNavigation}>
+          John 👤
+        </button>
 
         <div className="search-container">
           <form className="search-form">
@@ -43,9 +47,10 @@ export default function CleanMusic() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="left-aligned">
-          <button type="submit" className="btn btn-secondary">Next</button>
-        </form>
+        {/* Next button to go to Filters */}
+        <div className="left-aligned">
+          <button type="button" className="btn btn-secondary" onClick={handleNext}>Next</button>
+        </div>
       </div>
     </main>
   );
