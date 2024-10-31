@@ -3,9 +3,9 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
-import { login } from './login/login';
-import { cleanmusic } from './cleanmusic/cleanmusic';
-import { profile } from './profile/profile';
+import Login from './login/Login';
+import CleanMusic from './cleanmusic/CleanMusic';
+import Profile from './profile/Profile';
 
 export default function App() {
   return (
@@ -14,25 +14,25 @@ export default function App() {
         <header className='container-fluid'>
           <nav className='navbar fixed-top navbar-light'>
             <menu className="navbar-nav ms-auto d-flex justify-content-start gap-3">
-              <NavLink className="nav-link" to="login">Home</NavLink>
+              <NavLink className="nav-link" to="/">Home</NavLink>
               <li className="nav-item">
-                <NavLink className="nav-link" to="profile">Your Music</NavLink>
+                <NavLink className="nav-link" to="/profile">Your Music</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="cleanmusic">Clean Your Music</NavLink>
+                <NavLink className="nav-link" to="/cleanmusic">Clean Your Music</NavLink>
               </li>
             </menu>
           </nav>
         </header>
 
-        <main> App components go here</main>
+        <main>
           <Routes>
-            <Route path="/" element={<login />} />
-            <Route path="/cleanmusic" element={<cleanmusic />} />
-            <Route path="/profile" element={<profile />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/cleanmusic" element={<CleanMusic />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        
+        </main>
 
         <footer className='bg-light text-dark'>
           <div className='container-fluid'>
@@ -45,7 +45,12 @@ export default function App() {
       </div>
     </BrowserRouter>
   );
-  function NotFound() {
-    return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
-  }
+}
+
+function NotFound() {
+  return (
+    <main className='container-fluid bg-secondary text-center'>
+      404: Return to sender. Address unknown.
+    </main>
+  );
 }

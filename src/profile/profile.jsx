@@ -1,9 +1,10 @@
 import React from 'react';
 
-export function profile() {
+export default function Profile() {
   return (
-    <main className='container-fluid bg-secondary text-center'>
-      <div>login displayed here</div>
-    </main>
+    <div className="container text-center">
+      <h1>Profile Page</h1>
+      <p>Your profile and music details.</p>
+    </div>
   );
 }

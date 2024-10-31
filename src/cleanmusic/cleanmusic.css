@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* General Body and Font Styling */
+body, .body {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+}
+
+/* Header and Footer */
+header {
+    flex: 0 80px;
+}
+
+footer {
+    flex: 0 30px;
+}
+
+/* Navbar Links */
+.nav-link.active {
+    color: #35cfff;
+}
+
+/* Primary and Secondary Button Styles */
+.btn-primary, .btn-secondary {
+    background-color: #35cfff;
+    border-color: #35cfff;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: #2aa6d9;
+    border-color: #2aa6d9;
+}
+
+/* User Box Styling */
+.user-box {
+    background-color: #35cfff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* Song Item Labels */
+.song-item label {
+    font-size: 30px;
+}
+
+/* Left Aligned Section */
+.left-aligned {
+    align-self: flex-start;
+    width: 100%;
+    text-align: left;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Search Container Styling */
+.search-container {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.search-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.search-wrapper label {
+    padding-right: 10px;
+}
+
+/* Search Input and Button Styling */
+#search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-form button {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Menu and Navbar Items */
+menu {
+    flex: 1;
+    display: flex;
+    flex-direction: row !important;
+    list-style: none;
+}
+
+menu .nav-item {
+    padding: 0 0.3em;
+}
+
+/* Footer Link */
+footer a {
+    float: right;
+}
+
+/* Responsive Adjustments */
+@media (max-height: 600px) {
+    header, footer {
+        display: none;
+    }
+
+    main {
+        flex: 1;
+        width: calc(100% - 40px);
+        padding: 0 20px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+}
