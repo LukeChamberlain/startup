@@ -12,8 +12,8 @@ export default function Login() {
   };
 
   return (
-    <main className="container-fluid bg-secondary text-center">
-      <div>
+    <main className="container-fluid bg-secondary text-center d-flex justify-content-center align-items-center min-vh-100">
+      <div className="login-form">
         <h1>Welcome to Clean Music Plus</h1>
         <form onSubmit={handleSubmit} className="get">
           <div className="input-group mb-3">

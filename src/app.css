@@ -8,6 +8,16 @@
   font-style: normal;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #ffffff;
+  padding-left: 20px; 
+}
+
+
 .nav-link.active {
     color: #35cfff  !important;
   }
@@ -84,4 +94,5 @@ h1 {
       flex: 1 100vh;
     }
   }
+  
   
