@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cleanmusic.css';
 
-export default function CleanMusic() {
+export default function CleanMusic(props) {
+  const [song, setSong] = React.useState('Loading...')
   const navigate = useNavigate(); 
+
+  React.useEffect(() => {
+    setSong('Song Title');
+  }, []);
 
   const handleProfileNavigation = () => {
     navigate('/profile'); // Navigates to profile page
@@ -17,7 +22,6 @@ export default function CleanMusic() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        {/* John button to go to Profile */}
         <button type="button" className="btn btn-secondary" onClick={handleProfileNavigation}>
           John 👤
         </button>
@@ -35,15 +39,15 @@ export default function CleanMusic() {
         <div className="song-list left-aligned">
           <div>
             <input type="checkbox" id="Song1" name="Song1" value="Song1" />
-            <label htmlFor="Song1"> Song 1</label>
+            <label className='song'>{song}</label>
           </div>
           <div>
             <input type="checkbox" id="Song2" name="Song2" value="Song2" />
-            <label htmlFor="Song2"> Song 2</label>
+            <label className='song'>{song}</label>
           </div>
           <div>
             <input type="checkbox" id="Song3" name="Song3" value="Song3" />
-            <label htmlFor="Song3"> Song 3</label>
+            <label className='song'>{song}</label>
           </div>
         </div>
 

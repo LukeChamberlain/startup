@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './filters.css';
 
+// const [events, setEvent] = React.useState([]);
+// React.useEffect(() => {
+//   OtherUsers.addHandler(handleGameEvent);
+
+//   return () => {
+//     OtherUsers.removeHandler(handleGameEvent);
+//   };
+// });
+
 export default function Filters() {
   const navigate = useNavigate();
 
