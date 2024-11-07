@@ -49,6 +49,15 @@ export default function Filters() {
         <hr />
       </div>
 
+      <div className="song-list left-aligned">
+        <h1>Select Preset Filters (Future Websocket Use)</h1>
+        <input type="checkbox" id="PresetFilter1" name="Jeff Smith" />
+        <label htmlFor="PresetFilter1"> Jeff Smith</label><br />
+        <input type="checkbox" id="PresetFilter2" name="Luke Chamberlain" />
+        <label htmlFor="PresetFilter2"> Luke Chamberlain</label><br />
+        <hr />
+      </div>
+
       <div className="left-aligned">
         <button type="button" className="btn btn-secondary" onClick={goToDatabase}>
           Next
