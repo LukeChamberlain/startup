@@ -66,3 +66,15 @@ For this deliverable I properly styled the application into its final appearance
 - [x] **Application Text Content** - All fonts are the same and colors are consistent and readable
 - [x] **Application Images** - Mr.clean image is styled and centered correctly
 
+## React deliverable
+
+For this deliverable I used JavaScript and React so that the application completely works for a single user. I also added placeholders for future technology.
+
+- [x] **Bundled and transpiled** - done!
+- [x] **Components** - Login, music search, filter select, profile database are all components with mocks for login, WebSocket.
+  - [x] **login** - When you press enter or the login button it takes you to the music search and selection page.
+  - [x] **database** - The song options. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
+  - [x] **WebSocket** - The preset filters just have place holders and are mocked up. This will be replaced with WebSocket messages later.
+  - [x] **application logic** - The filter and song determination if it is clean or not is based on the user's selections.
+- [x] **Router** - Routing between login and all song select, filter, and profile components.
+- [x] **Hooks** - done!
