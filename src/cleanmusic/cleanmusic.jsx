@@ -10,32 +10,38 @@ export default function CleanMusic(props) {
     'Song Title 3',
     'Another Song',
     'Different Song'
-  ]); // List of all songs
-  const [searchTerm, setSearchTerm] = useState(''); // State to hold search input
-  const [filteredSongs, setFilteredSongs] = useState(songs); // Songs to display based on search
+  ]); 
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const [filteredSongs, setFilteredSongs] = useState(songs); 
+  const [selectedSong, setSelectedSong] = useState(''); 
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    // Initialize song list if necessary
     setFilteredSongs(songs);
   }, [songs]);
 
-  // Handle profile navigation
   const handleProfileNavigation = () => {
     navigate('/profile');
   };
 
-  // Handle navigation to filters
   const handleNext = () => {
-    navigate('/filters');
+    if (selectedSong) {
+      console.log("Navigating to Filters with song:", selectedSong); // Debug log
+      navigate('/filters', { state: { song: selectedSong } });
+    } else {
+      alert("Please select a song before proceeding.");
+    }
   };
+  
 
-  // Handle search input changes
   const handleSearchChange = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
-    // Filter songs based on search term
     setFilteredSongs(songs.filter(song => song.toLowerCase().includes(term)));
+  };
+
+  const handleSongSelect = (song) => {
+    setSelectedSong(song); 
   };
 
   return (
@@ -55,7 +61,7 @@ export default function CleanMusic(props) {
                 name="q"
                 placeholder="Search for Music"
                 value={searchTerm}
-                onChange={handleSearchChange} // Update search input
+                onChange={handleSearchChange} 
               />
             </div>
           </form>
@@ -65,12 +71,19 @@ export default function CleanMusic(props) {
           {filteredSongs.length > 0 ? (
             filteredSongs.map((song, index) => (
               <div key={index}>
-                <input type="checkbox" id={`Song${index}`} name={`Song${index}`} value={song} />
+                <input
+                  type="radio"
+                  id={`Song${index}`}
+                  name="selectedSong"
+                  value={song}
+                  checked={selectedSong === song}
+                  onChange={() => handleSongSelect(song)}
+                />
                 <label className='song' htmlFor={`Song${index}`}>{song}</label>
               </div>
             ))
           ) : (
-            <p>No songs found</p> // Display message if no songs match the search
+            <p>No songs found</p>
           )}
         </div>
 
