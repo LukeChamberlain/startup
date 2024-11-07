@@ -1,22 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cleanmusic.css';
 
 export default function CleanMusic(props) {
-  const [song, setSong] = React.useState('Loading...')
+  const [songs, setSongs] = useState([
+    'Song Title 1',
+    'Song Title 2',
+    'Song Title 3',
+    'Another Song',
+    'Different Song'
+  ]); // List of all songs
+  const [searchTerm, setSearchTerm] = useState(''); // State to hold search input
+  const [filteredSongs, setFilteredSongs] = useState(songs); // Songs to display based on search
   const navigate = useNavigate(); 
 
-  React.useEffect(() => {
-    setSong('Song Title');
-  }, []);
+  useEffect(() => {
+    // Initialize song list if necessary
+    setFilteredSongs(songs);
+  }, [songs]);
 
+  // Handle profile navigation
   const handleProfileNavigation = () => {
-    navigate('/profile'); // Navigates to profile page
+    navigate('/profile');
   };
 
+  // Handle navigation to filters
   const handleNext = () => {
-    navigate('/filters'); // Navigates to filters page
+    navigate('/filters');
+  };
+
+  // Handle search input changes
+  const handleSearchChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+    // Filter songs based on search term
+    setFilteredSongs(songs.filter(song => song.toLowerCase().includes(term)));
   };
 
   return (
@@ -27,31 +46,34 @@ export default function CleanMusic(props) {
         </button>
 
         <div className="search-container">
-          <form className="search-form">
+          <form className="search-form" onSubmit={(e) => e.preventDefault()}>
             <div className="search-wrapper">
               <label htmlFor="search-input"></label>
-              <input type="search" id="search-input" name="q" placeholder="Search for Music" />
+              <input
+                type="search"
+                id="search-input"
+                name="q"
+                placeholder="Search for Music"
+                value={searchTerm}
+                onChange={handleSearchChange} // Update search input
+              />
             </div>
-            <button type="button" className="btn btn-secondary">Search</button>
           </form>
         </div>
 
         <div className="song-list left-aligned">
-          <div>
-            <input type="checkbox" id="Song1" name="Song1" value="Song1" />
-            <label className='song'>{song}</label>
-          </div>
-          <div>
-            <input type="checkbox" id="Song2" name="Song2" value="Song2" />
-            <label className='song'>{song}</label>
-          </div>
-          <div>
-            <input type="checkbox" id="Song3" name="Song3" value="Song3" />
-            <label className='song'>{song}</label>
-          </div>
+          {filteredSongs.length > 0 ? (
+            filteredSongs.map((song, index) => (
+              <div key={index}>
+                <input type="checkbox" id={`Song${index}`} name={`Song${index}`} value={song} />
+                <label className='song' htmlFor={`Song${index}`}>{song}</label>
+              </div>
+            ))
+          ) : (
+            <p>No songs found</p> // Display message if no songs match the search
+          )}
         </div>
 
-        {/* Next button to go to Filters */}
         <div className="left-aligned">
           <button type="button" className="btn btn-secondary" onClick={handleNext}>Next</button>
         </div>
