@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-
-.body{
+.body {
   font-family: "Raleway", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
@@ -14,85 +12,91 @@
   width: 100%;
   z-index: 1000;
   background-color: #ffffff;
-  padding-left: 20px; 
+  padding: 0;
+  transition: transform 0.3s ease;
 }
 
+/* Hide navbar on scroll down */
+.hidden .navbar {
+  transform: translateY(-100%);
+}
 
 .nav-link.active {
-    color: #35cfff  !important;
-  }
+  color: #35cfff !important;
+}
 
 .btn-primary {
-    background-color: #35cfff  !important; 
-    border-color: #35cfff  !important; 
+  background-color: #35cfff !important;
+  border-color: #35cfff !important;
 }
 
 .btn-primary:hover {
-    background-color: #2aa6d9  !important; 
-    border-color: #2aa6d9  !important; 
+  background-color: #2aa6d9 !important;
+  border-color: #2aa6d9 !important;
 }
 
 .btn-secondary {
-    background-color: #35cfff  !important; 
-    border-color: #35cfff  !important; 
+  background-color: #35cfff !important;
+  border-color: #35cfff !important;
 }
 
 .btn-secondary:hover {
-    background-color: #2aa6d9  !important; 
-    border-color: #2aa6d9  !important; 
+  background-color: #2aa6d9 !important;
+  border-color: #2aa6d9 !important;
 }
 
 h1 {
-    color: #35cfff; 
+  color: #35cfff;
 }
 
 .body {
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-  }
-  
-  header {
-    flex: 0 80px;
-  }
-  
-  main {
-    flex: 1 calc(100vh - 110px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  footer {
-    flex: 0 30px;
-  }
-  
-  menu {
-    flex: 1;
-    display: flex;
-    flex-direction: row !important;
-    list-style: none;
-  }
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
 
-  menu .nav-item {
-    padding: 0 0.3em;
+header {
+  flex: 0 80px;
+}
+
+main {
+  flex: 1 calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 80px; /* Offset main content for fixed navbar */
+}
+
+footer {
+  flex: 0 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu .nav-item {
+  padding: 0 15px;
+}
+
+footer a {
+  float: right;
+}
+
+@media (max-height: 600px) {
+  header {
+    display: none;
   }
-  
-  footer a {
-    float: right;
+  footer {
+    display: none;
   }
-  
-  @media (max-height: 600px) {
-    header {
-      display: none;
-    }
-    footer {
-      display: none;
-    }
-    main {
-      flex: 1 100vh;
-    }
+  main {
+    flex: 1 100vh;
   }
-  
-  
+}

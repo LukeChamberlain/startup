@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
@@ -10,12 +10,27 @@ import Filters from './filters/Filters';
 import Database from './database/Database';
 
 export default function App() {
+  const [hideNavbar, setHideNavbar] = useState(false);
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setHideNavbar(scrollTop > lastScrollTop);
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="body bg-light text-dark">
-        <header className="container-fluid">
+        <header className={`container-fluid ${hideNavbar ? 'hidden' : ''}`}>
           <nav className="navbar navbar-light">
-            <menu className="navbar-nav ms-auto d-flex justify-content-start gap-3">
+            <menu className="navbar-nav d-flex gap-3">
               <NavLink className="nav-link" to="/">Home</NavLink>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">Your Music</NavLink>
@@ -38,10 +53,10 @@ export default function App() {
           </Routes>
         </main>
 
-        <footer>
-          <div className="container-fluid">
+        <footer className="container-fluid">
+          <div>
             <span className="text-reset">Luke Chamberlain</span>
-            <a className="text-reset" href="https://github.com/LukeChamberlain/startup">
+            <a className="text-reset float-end" href="https://github.com/LukeChamberlain/startup">
               Github
             </a>
           </div>
