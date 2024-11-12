@@ -43,8 +43,8 @@ export default function App() {
     <BrowserRouter>
       <div className="body bg-light text-dark">
         <header className={`container-fluid ${hideNavbar ? 'hidden' : ''}`}>
-          <nav className="navbar navbar-light">
-            <ul className="navbar-nav d-flex gap-3">
+          <nav className="navbar navbar-light w-100 justify-content-center">
+            <ul className="navbar-nav w-100 flex-row justify-content-center gap-3">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">Home</NavLink>
               </li>
