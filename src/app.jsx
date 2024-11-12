@@ -8,10 +8,24 @@ import CleanMusic from './cleanmusic/CleanMusic';
 import Profile from './profile/Profile';
 import Filters from './filters/Filters';
 import Database from './database/Database';
+import { AuthState } from './login/authState';
 
 export default function App() {
   const [hideNavbar, setHideNavbar] = useState(false);
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
+  const [authState, setAuthState] = useState(userName ? AuthState.Authenticated : AuthState.Unauthenticated);
 
+  const handleAuthChange = (userName, authState) => {
+    setAuthState(authState);
+    setUserName(userName);
+    if (authState === AuthState.Authenticated) {
+      localStorage.setItem('userName', userName);
+    } else {
+      localStorage.removeItem('userName');
+    }
+  };
+
+  // Scroll event handler with persistent lastScrollTop
   useEffect(() => {
     let lastScrollTop = 0;
 
@@ -30,26 +44,32 @@ export default function App() {
       <div className="body bg-light text-dark">
         <header className={`container-fluid ${hideNavbar ? 'hidden' : ''}`}>
           <nav className="navbar navbar-light">
-            <menu className="navbar-nav d-flex gap-3">
-              <NavLink className="nav-link" to="/">Home</NavLink>
+            <ul className="navbar-nav d-flex gap-3">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">Your Music</NavLink>
+                <NavLink className="nav-link" to="/">Home</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/cleanmusic">Clean Your Music</NavLink>
-              </li>
-            </menu>
+              {authState === AuthState.Authenticated && (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/profile">Your Music</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/cleanmusic">Clean Your Music</NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
           </nav>
         </header>
 
         <main>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Login onAuthChange={handleAuthChange} />} />
             <Route path="/cleanmusic" element={<CleanMusic />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/filters" element={<Filters />} />
             <Route path="/database" element={<Database />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
