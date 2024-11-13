@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import xml2js from 'xml2js';  // Import xml2js to parse XML
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cleanmusic.css';
 
@@ -16,13 +15,13 @@ export default function CleanMusic() {
   const handleSearchChange = async (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
-  
+
     if (term.length < 2) {
       setError('Please enter at least 2 characters.');
       setFilteredSongs([]); // Clear previous results
       return; // Early return if the query is too short
     }
-  
+
     if (term) {
       setLoading(true); // Show loading spinner
       try {
@@ -30,29 +29,28 @@ export default function CleanMusic() {
         const response = await axios.get('/api/search', {
           params: { query: term, artist: term, song: term }
         });
-  
-        // Parse the XML response into JSON
-        const parser = new xml2js.Parser();
-        const parsedData = await parser.parseStringPromise(response.data);
-  
-        // Log the parsed data to inspect its structure
-        console.log(parsedData); // <-- Keep this to check the parsed structure
-  
-        // Extract songs data from the parsed JSON
-        const songList = parsedData.ArrayOfSearchLyricResult.SearchLyricResult
-          .filter((song) => song.Song && song.Artist) // Ensure there are both Song and Artist
+
+        // Log the response to see what the data looks like
+        console.log("Response from API:", response.data);
+
+        // Map the response data to song list
+        const songList = response.data
+          .filter((song) => song.artist && song.title) // Ensure there are both artist and title
           .map((song) => ({
-            artist: song.Artist[0],
-            title: song.Song[0],
-            songUrl: song.SongUrl[0],
-            artistUrl: song.ArtistUrl[0],
+            artist: song.artist,
+            title: song.title,
+            songUrl: song.SongUrl,
+            artistUrl: song.ArtistUrl,
           }));
-  
+
+        if (songList.length === 0) {
+          setError('No songs found for your search');
+        } else {
+          setError(''); // Clear previous errors
+        }
+
         setFilteredSongs(songList);
-        setError(''); // Clear previous errors
       } catch (error) {
-        console.error('Error fetching search results:', error);
-        setError('Error fetching search results');
         setFilteredSongs([]);
       } finally {
         setLoading(false); // Hide loading spinner after fetching
@@ -61,7 +59,7 @@ export default function CleanMusic() {
       setFilteredSongs([]);
     }
   };
-  
+
   const handleSongSelect = (song) => {
     setSelectedSong(song);
   };
@@ -107,8 +105,8 @@ export default function CleanMusic() {
           </form>
         </div>
 
-        {loading && <p>Loading...</p>}
-        {error && <p className="text-danger">{error}</p>}
+        {loading && <p>Loading...</p>} {/* Show loading spinner */}
+        {error && <p className="text-danger">{error}</p>} {/* Show error message */}
 
         <div className="song-list left-aligned">
           {filteredSongs.length > 0 ? (
@@ -122,13 +120,13 @@ export default function CleanMusic() {
                   checked={selectedSong?.title === song.title && selectedSong?.artist === song.artist}
                   onChange={() => handleSongSelect(song)}
                 />
-                <label className='song' htmlFor={`Song${index}`}>
+                <label className="song" htmlFor={`Song${index}`}>
                   {song.artist} - {song.title}
                 </label>
               </div>
             ))
           ) : (
-            <p>No songs found</p>
+            <p>No songs found</p> // Display "No songs found" message if the list is empty
           )}
         </div>
 

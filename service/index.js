@@ -110,11 +110,13 @@ apiRouter.get('/search', async (req, res) => {
         return res.status(404).json({ error: 'No songs found for the given lyrics' });
       }
 
-      // Map the search results into a simplified song object
-      const songs = searchResults.map(item => ({
-        artist: item.Artist ? item.Artist[0] : 'Unknown Artist',  // Handle missing artist
-        title: item.Song ? item.Song[0] : 'Unknown Title',  // Handle missing song title
-      }));
+      // Filter out invalid results like 'Unknown Artist' or 'Unknown Title'
+      const songs = searchResults
+        .filter(item => item.Artist && item.Song && item.Artist[0] !== 'Unknown Artist' && item.Song[0] !== 'Unknown Title')
+        .map(item => ({
+          artist: item.Artist ? item.Artist[0] : 'Unknown Artist', 
+          title: item.Song ? item.Song[0] : 'Unknown Title',  
+        }));
 
       console.log("Returning songs:", songs);
       return res.json(songs);
@@ -123,31 +125,6 @@ apiRouter.get('/search', async (req, res) => {
     console.error('Error fetching songs from ChartLyrics API:', error);
     return res.status(500).send({ error: 'Failed to fetch songs' });
   }
-});
-
-
-
-parser.parseString(xmlData, (err, result) => {
-  if (err) {
-    console.error('Error parsing XML:', err);
-    return res.status(500).send({ error: 'Failed to parse search results' });
-  }
-
-  // Log the parsed result to see the full structure of the data
-  console.log("Parsed API response:", result);
-
-  const searchResults = result.ArrayOfSearchLyricResult?.SearchLyricResult || [];
-  if (!searchResults || searchResults.length === 0) {
-    console.log('No results found for query:', query);
-    return res.status(404).json({ error: 'No songs found for the given lyrics' });
-  }
-
-  const songs = searchResults.map(item => ({
-    artist: item.Artist[0],  // Extract artist
-    title: item.Song[0],     // Extract song title
-  }));
-
-  return res.json(songs);
 });
 
 // Serve static files from the root directory
