@@ -78,3 +78,13 @@ For this deliverable I used JavaScript and React so that the application complet
   - [x] **application logic** - The filter and song determination if it is clean or not is based on the user's selections.
 - [x] **Router** - Routing between login and all song select, filter, and profile components.
 - [x] **Hooks** - done!
+
+## Service deliverable
+
+For this deliverable I added backend endpoints that receives a search and returns the songs, and also log in.
+
+- [x] **Node.js/Express HTTP service** - done!
+- [x] **Static middleware for frontend** - done!
+- [x] **Calls to third party endpoints** - done!
+- [x] **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for song search
+- [x] **Frontend calls service endpoints** - I did this using the fetch function.
