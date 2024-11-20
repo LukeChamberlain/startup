@@ -1,0 +1,6 @@
+{
+    "hostname": "cluster0.yahee.mongodb.net",
+    "userName": "luke",
+    "password": "CS260",
+    "connectionString": "mongodb+srv://luke:CS260@cluster0.yahee.mongodb.net/?"
+  }
