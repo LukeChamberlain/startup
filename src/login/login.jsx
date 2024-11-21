@@ -14,9 +14,9 @@ export default function Login({ userName, authState, onAuthChange }) {
   useEffect(() => {
     if (authState === AuthState.Authenticated) {
       // Navigate to CleanMusic page after successful login
-      navigate('/cleanmusic');
+      navigate('/cleanmusic', { state: { email } });
     }
-  }, [authState, navigate]);
+  }, [authState, email, navigate]);
 
   const handleLogin = async () => {
     try {
@@ -29,7 +29,7 @@ export default function Login({ userName, authState, onAuthChange }) {
       if (response.ok) {
         const data = await response.json();
         onAuthChange(email, AuthState.Authenticated, data.token);
-        navigate('/cleanmusic'); // Navigate to CleanMusic after successful login
+        navigate('/cleanmusic', { state: { email } }); // Pass email to CleanMusic
       } else {
         setError('Login failed: Incorrect email or password.');
       }
@@ -49,7 +49,7 @@ export default function Login({ userName, authState, onAuthChange }) {
       if (response.ok) {
         const data = await response.json();
         onAuthChange(email, AuthState.Authenticated, data.token);
-        navigate('/cleanmusic'); // Navigate to CleanMusic after successful account creation
+        navigate('/cleanmusic', { state: { email } }); // Pass email to CleanMusic
       } else if (response.status === 409) {
         setError('Account creation failed: User already exists.');
       } else {

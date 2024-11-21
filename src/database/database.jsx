@@ -53,7 +53,7 @@ export default function Database() {
   }, [selectedSong, location.state?.artist]);
 
   const filterConditions = {
-    swearWords: /(?:\b(?:damn|hell|crap|bastard|ass|...)\b)/gi, // shortened for readability
+    swearWords: /(?:\b(?:damn|hell|crap|bastard|ass|...)\b)/gi,
     violentLanguage: /(?:\b(?:kill|murder|assault|...)\b)/gi,
     raciallyAggressive: /(?:\b(?:ape|bimbo|cotton picker|...)\b)/gi,
     sexualInnuendo: /(?:\b(?:sex|innuendo|explicit|...)\b)/gi,
@@ -65,13 +65,22 @@ export default function Database() {
       isSelected && filterConditions[filterKey]?.test(lyrics)
   );
 
-  const handleAddToProfile = () => {
+  // This function now redirects to the profile page after adding the song.
+  const handleAddToProfile = async () => {
     const songData = {
       title: selectedSong,
-      artist: 'Unknown Artist',
+      artist: location.state?.artist || 'Unknown Artist',
       status: hasOffensiveContent ? 'Explicit' : 'Clean',
     };
-    navigate('/profile');
+
+    try {
+      const response = await axios.post('/api/profile/add-song', songData);
+      console.log('Response from adding song:', response);
+
+    } catch (error) {
+      console.error('Error adding song to profile:', error);
+    }
+    navigate('/profile', { state: { email: location.state?.email } });
   };
 
   return (
@@ -81,7 +90,9 @@ export default function Database() {
           <>
             <h1>{hasOffensiveContent ? 'Not Certified Clean ❌' : 'Certified Clean ✅'}</h1>
             <p>Song: {selectedSong}</p>
-            <button className="btn btn-primary" onClick={handleAddToProfile}>Add to Profile</button>
+            <button className="btn btn-primary" onClick={handleAddToProfile}>
+              Add to Profile
+            </button>
           </>
         )}
       </div>

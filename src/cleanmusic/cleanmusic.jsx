@@ -1,64 +1,64 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cleanmusic.css';
 
 export default function CleanMusic() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+
+  // Get the email from the location state
+  const email = location.state?.email;
 
   const handleSearchChange = async (event) => {
-    const term = event.target.value.toLowerCase();
+    const term = event.target.value.trim().toLowerCase(); // Trim spaces before processing
     setSearchTerm(term);
-
+  
     if (term.length < 2) {
       setError('Please enter at least 2 characters.');
       setFilteredSongs([]); // Clear previous results
       return; // Early return if the query is too short
     }
-
-    if (term) {
+  
+    try {
       setLoading(true); // Show loading spinner
-      try {
-        // Send the search term along with artist and song as params if available
-        const response = await axios.get('/api/search', {
-          params: { query: term, artist: term, song: term }
-        });
-
-        // Log the response to see what the data looks like
-        console.log("Response from API:", response.data);
-
-        // Map the response data to song list
-        const songList = response.data
-          .filter((song) => song.artist && song.title) // Ensure there are both artist and title
-          .map((song) => ({
-            artist: song.artist,
-            title: song.title,
-            songUrl: song.SongUrl,
-            artistUrl: song.ArtistUrl,
-          }));
-
-        if (songList.length === 0) {
-          setError('No songs found for your search');
-        } else {
-          setError(''); // Clear previous errors
-        }
-
-        setFilteredSongs(songList);
-      } catch (error) {
-        setFilteredSongs([]);
-      } finally {
-        setLoading(false); // Hide loading spinner after fetching
+      const response = await axios.get('/api/search', {
+        params: { query: term, artist: term, song: term }
+      });
+  
+      console.log("Response from API:", response.data);
+  
+      const songList = response.data
+        .filter((song) => song.artist && song.title) // Ensure there are both artist and title
+        .map((song) => ({
+          artist: song.artist,
+          title: song.title,
+          songUrl: song.SongUrl,
+          artistUrl: song.ArtistUrl,
+        }));
+  
+      if (songList.length === 0) {
+        setError('No songs found for your search');
+      } else {
+        setError(''); // Clear previous errors
       }
-    } else {
+  
+      setFilteredSongs(songList);
+    } catch (error) {
+      console.error(error);
+      setError('An error occurred while fetching songs');
       setFilteredSongs([]);
+    } finally {
+      setLoading(false); // Hide loading spinner after fetching
     }
   };
+  
 
   const handleSongSelect = (song) => {
     setSelectedSong(song);
@@ -90,6 +90,7 @@ export default function CleanMusic() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
+        <h3>Logged in as: {email}</h3> {/* Display logged-in user's email */}
         <div className="search-container">
           <form className="search-form" onSubmit={(e) => e.preventDefault()}>
             <div className="search-wrapper">
@@ -126,12 +127,16 @@ export default function CleanMusic() {
               </div>
             ))
           ) : (
-            <p>No songs found</p> // Display "No songs found" message if the list is empty
+            <p>No songs found</p>
           )}
         </div>
 
-        <div className="left-aligned">
-          <button type="button" className="btn btn-secondary" onClick={handleNext}>
+        <div className="next-button-container">
+          <button
+            className="next-button btn btn-primary"
+            onClick={handleNext}
+            disabled={!selectedSong || loading}
+          >
             Next
           </button>
         </div>

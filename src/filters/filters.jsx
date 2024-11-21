@@ -7,6 +7,7 @@ export default function Filters() {
   const location = useLocation();
   const navigate = useNavigate();
   const selectedSong = location.state?.song;
+  const email = location.state?.email;
 
   const [filters, setFilters] = useState({
     swearWords: false,
@@ -29,9 +30,10 @@ export default function Filters() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        <button type="button" className="btn btn-secondary" onClick={() => navigate('/profile')}>
-          John 👤
-        </button>
+        {/* Display the email as text, styled like on cleanmusic page */}
+        <div className="email-display">
+          <span>{email}</span>
+        </div>
       </div>
 
       <div className="song-list left-aligned">

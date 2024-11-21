@@ -3,7 +3,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
-import Login from './login/Login';
+import Login from './login/login';
 import CleanMusic from './cleanmusic/CleanMusic';
 import Profile from './profile/Profile';
 import Filters from './filters/Filters';
