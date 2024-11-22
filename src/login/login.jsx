@@ -23,33 +23,40 @@ export default function Login({ userName, authState, onAuthChange }) {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }),  // Sending email and password in the body
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         onAuthChange(email, AuthState.Authenticated, data.token);
-        navigate('/cleanmusic', { state: { email } }); // Pass email to CleanMusic
+        navigate('/cleanmusic', { state: { email } });  // After successful login, redirect
       } else {
-        setError('Login failed: Incorrect email or password.');
+        const errorData = await response.json();
+        setError(errorData.msg || 'Login failed: Incorrect email or password.');
       }
     } catch (err) {
       setError('An error occurred during login.');
+      console.error('Error during login:', err);
     }
   };
+  
+  
+  
+  
 
   const handleCreate = async () => {
     try {
+      const trimmedEmail = email.trim(); // Remove leading/trailing whitespace
       const response = await fetch('/api/auth/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: trimmedEmail, password }),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        onAuthChange(email, AuthState.Authenticated, data.token);
-        navigate('/cleanmusic', { state: { email } }); // Pass email to CleanMusic
+        onAuthChange(trimmedEmail, AuthState.Authenticated, data.token);
+        navigate('/cleanmusic', { state: { email: trimmedEmail } });
       } else if (response.status === 409) {
         setError('Account creation failed: User already exists.');
       } else {
@@ -59,6 +66,7 @@ export default function Login({ userName, authState, onAuthChange }) {
       setError('An error occurred during account creation.');
     }
   };
+  
 
   return (
     <main className="container-fluid bg-secondary text-center d-flex justify-content-center align-items-center min-vh-100">
