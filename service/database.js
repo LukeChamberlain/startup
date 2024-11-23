@@ -5,10 +5,17 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
 // Connect to MongoDB
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.log('MongoDB connection error:', err));
-  
+const connectToMongo = async () => {
+  try {
+    // Removed deprecated options
+    await mongoose.connect(url);  // No need for useNewUrlParser and useUnifiedTopology
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.log('MongoDB connection error:', err);
+    throw err;
+  }
+};
+
 const songSchema = new mongoose.Schema({
   title: String,
   artist: String,
@@ -63,5 +70,5 @@ const getUserByToken = async (token) => {
   }
 };
 
-// Export functions to be used in other files
-module.exports = { getUser, createUser, getUserByToken };
+// Export the connection function and models
+module.exports = { connectToMongo, getUser, createUser, getUserByToken };

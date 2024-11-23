@@ -15,13 +15,8 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.set('trust proxy', true);
 
-// MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/musicApp', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('Connected to MongoDB: musicApp'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Establish the MongoDB connection
+DB.connectToMongo(); // Ensure MongoDB is connected before using it in routes
 
 // MongoDB Schemas and Models
 const songSchema = new mongoose.Schema({
@@ -37,7 +32,7 @@ const userSchema = new mongoose.Schema({
   token: String, // Authentication token for the user
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 // Router for service endpoints
 const apiRouter = express.Router();
@@ -48,21 +43,17 @@ apiRouter.post('/auth/create', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user already exists
     const existingUser = await User.findOne({ email: email.trim().toLowerCase() });
     if (existingUser) {
       return res.status(409).json({ msg: 'Existing user' });
     }
 
-    // Hash the password before saving the user
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ email: email.trim().toLowerCase(), password: hashedPassword });
     await newUser.save();
 
-    // Create a JWT token
     const token = jwt.sign({ id: newUser._id }, 'your_secret_key', { expiresIn: '1h' });
 
-    // Set the token in a cookie
     setAuthCookie(res, token);
 
     res.status(201).json({ msg: 'User created', token });
