@@ -88,3 +88,15 @@ For this deliverable I added backend endpoints that receives a search and return
 - [x] **Calls to third party endpoints** - done!
 - [x] **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for song search
 - [x] **Frontend calls service endpoints** - I did this using the fetch function.
+
+
+## DB/Login deliverable
+
+➡️ The following is an example of the required information for the `Startup DB/Login` deliverable
+
+- [x] **MongoDB Atlas database created** - Done
+- [x] **Stores data in MongoDB** - Done
+- [x] **User registration** - Done
+- [x] **existing user** - Done
+- [ ] **Use MongoDB to store credentials** - It creates a user but it won't associate songs with specific users
+- [x] **Restricts functionality** - You cannot search and filter until you have logged in.
