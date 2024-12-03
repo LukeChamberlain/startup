@@ -76,7 +76,6 @@ export default function Database() {
     sexualInnuendo: /(?:\b(?:sex|innuendo|explicit|seductive|provocative|nudity|porno|erotic|adult|XXX|fetish|kinky|orgasm|hardcore|strip|masturbate|fornicate|lewd|naked|nude|raunchy|risqué|lust|seduce|sexy|pervert|voyeur|flirt|passionate|horny|thrust|sensual|sultry|tempt|desire|nookie|quickie|booty|thong|pussy|bj|handjob|make out|luscious|nipple|boobs|cleavage|softcore|penetration|sexting|playboy|dirty|grind|sizzle|eroticism|foreplay|stripper|pole dance|panties|down and dirty|screw|hook up|hustler|one-night stand|red-light|prostitute|call girl|escort|sex worker|swinger|bareback|submissive|dominant|bdsm|handcuffs|naughty|bad girl|taboo|pleasure|fondle|cuddle|smut|kisses)\b)/gi,
     suggestiveTopics: /(?:\b(?:drug|alcohol|abuse|gambling|intoxicated|substance|weed|marijuana|cocaine|meth|heroin|LSD|acid|crack|overdose|opium|smoke|stoned|high|drunk|buzzed|addiction|casino|lottery|pills|overdrink|binge|intoxicate|psychedelic|trip|hallucinate|blackout|dependency|vape|narcotics|tobacco|e-cigarette|cigarette|cannabis|pot|hookah|beer|wine|liquor|binge drink|moonshine|hashish|molly|mushrooms|shrooms|ecstasy|party drugs|barbiturate|methamphetamine|opiates|heroin|hash|lean|spiked|sedative|poppy|booze|hydrocodone|oxy|painkiller|codeine|uppers|downers|sizzurp|scante|dope|blow|sniff|doobie|joint|pipe|blunt|dab|dab rig|vaping|chew)\b)/gi,
   };
-  };
 
   // Check if any selected filter has a match in the song lyrics
   const hasOffensiveContent = Object.entries(filters).some(
@@ -94,7 +93,6 @@ export default function Database() {
   };
 
   return (
-
     <main className="container-fluid bg-secondary">
       <div>
         {loading && <p>Loading lyrics...</p>} {/* Show loading indicator while fetching lyrics */}
