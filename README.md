@@ -100,3 +100,12 @@ For this deliverable I added backend endpoints that receives a search and return
 - [x] **existing user** - Done
 - [ ] **Use MongoDB to store credentials** - It creates a user but it won't associate songs with specific users
 - [x] **Restricts functionality** - You cannot search and filter until you have logged in.
+
+## WebSocket deliverable
+
+For this deliverable I used webSocket to display active users on the frontend in realtime.
+
+- [x] **Backend listens for WebSocket connection** - done!
+- [x] **Frontend makes WebSocket connection** - done!
+- [x] **Data sent over WebSocket connection** - done!
+- [x] **WebSocket data displayed** - All active users display in realtime.
