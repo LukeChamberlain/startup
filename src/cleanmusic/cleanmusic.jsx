@@ -75,7 +75,7 @@ export default function CleanMusic() {
         });
         const { lyrics } = response.data;
 
-        navigate('/filters', { state: { song: `${artist} - ${title}`, lyrics } });
+        navigate('/filters', { state: { song: `${artist} - ${title}`, lyrics, email } });
       } catch (error) {
         console.error('Error fetching lyrics:', error);
         setError('Failed to fetch lyrics. Please try again.');

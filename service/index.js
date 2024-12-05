@@ -10,6 +10,16 @@ const cors = require('cors'); // CORS middleware
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
+const http = require('http');
+const { peerProxy } = require('./peerProxy'); // Adjust the path as necessary
+
+const httpServer = http.createServer(app); // Assuming `app` is your Express app
+peerProxy(httpServer);
+
+httpServer.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
 // Middleware setup
 app.use(express.json());
 app.use(cookieParser());

@@ -15,12 +15,28 @@ function peerProxy(httpServer) {
   // Keep track of all the connections so we can forward messages
   let connections = [];
 
+  ws.on('message', function message(data) {
+    try {
+      const parsedData = JSON.parse(data);
+      // Broadcast parsed data, ensuring all clients receive valid JSON
+      connections.forEach((c) => {
+        if (c.id !== connection.id) {
+          c.ws.send(JSON.stringify(parsedData));
+        }
+      });
+    } catch (err) {
+      console.error('Failed to parse WebSocket message:', err);
+    }
+  });
+
+  
   wss.on('connection', (ws) => {
+    console.log('New connection established');
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
-
-    // Forward messages to everyone except the sender
-    ws.on('message', function message(data) {
+  
+    ws.on('message', (data) => {
+      console.log(`Received message: ${data}`);
       connections.forEach((c) => {
         if (c.id !== connection.id) {
           c.ws.send(data);
@@ -28,14 +44,17 @@ function peerProxy(httpServer) {
       });
     });
 
-    // Remove the closed connection so we don't try to forward anymore
     ws.on('close', () => {
-      const pos = connections.findIndex((o, i) => o.id === connection.id);
+        console.log(`Connection closed: ${connection.id}`);
+        const pos = connections.findIndex((o) => o.id === connection.id);
+        if (pos >= 0) {
+          connections.splice(pos, 1);
+        }
+      });
 
-      if (pos >= 0) {
-        connections.splice(pos, 1);
-      }
-    });
+    ws.on('error', (error) => {
+        console.error(`WebSocket error: ${error}`);
+      });
 
     // Respond to pong messages by marking the connection alive
     ws.on('pong', () => {
